@@ -1,0 +1,10 @@
+package com.example.myweatherapp.models
+
+
+import com.google.gson.annotations.SerializedName
+
+data class Wind(
+    val deg: Int,
+    val gust: Int,
+    val speed: Double
+)
