@@ -27,8 +27,13 @@
   </ul>
   <li>UI</li>
   <ul>
-    <li>Better design with Material Design components added in</li>
-    <li>Color Scheme</li>
+    <li>Make it Overall Prettier</li>
+    <ul>
+      <li>Better design with Material Design components added in</li>
+      <li>Color Scheme</li>
+      <li>picutres for general conditions (cloudy, partly cloudy, sunny, etc)</li>
+    </ul>
+    
     <li>Show recently searched or saved locations (new fragment, maybe tab)</li>
     <li>Make Error Toasts more visible</li>
     <li>Add Settings Menu (ellipses)</li>
