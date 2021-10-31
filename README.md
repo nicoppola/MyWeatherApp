@@ -3,7 +3,7 @@
 ### Search for Weather Information based on city, zip code, or current location
 * defaults to St. Louis, MO
 
-### About
+## About
 - Android Studio Version: 2020.3.1 Patch 3
 - CompileSdkVersion: 31
 - Build Tools Version: 30.0.2
@@ -11,12 +11,13 @@
 - Target Sdk Version 31
 - Tested Mainly With: Pixel 4 API 30 emulator (Must have emulator with play store for location services)
 
-### Future Work (with more time):
+## Future Work (with more time):
 <ul>
   <li>Learn more about Dagger</li>
   <ul>
     <li>Hook up Connectivity Interceptor to handle crash when no access to Internet</li>
   </ul>
+  <li>Look into abstracting permissions management/requests to its own class</li>
   <li>Double check handling of failed cases: (no location services, no Internet, bad request, etc.)</li>
   <li>Condense Weather Response into a WeatherModel with only data used</li>
   <li>Add Room Database</li>
@@ -31,6 +32,8 @@
     <ul>
       <li>Better design with Material Design components added in</li>
       <li>Color Scheme</li>
+      <li>Extract sizes to a style file</li>
+      <li>Create custom view components for repeating patterns, ie: label, value, unit; (material design components might be able to replace)</li>
       <li>picutres for general conditions (cloudy, partly cloudy, sunny, etc)</li>
     </ul>
     <li>Show recently searched or saved locations (new fragment, maybe tab)</li>
