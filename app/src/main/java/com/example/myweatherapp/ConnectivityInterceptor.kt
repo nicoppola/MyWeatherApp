@@ -8,21 +8,23 @@ import okhttp3.Response
 
 class ConnectivityInterceptor(
     context: Context
-) : IConnectivityInterceptor{
+) : IConnectivityInterceptor {
 
     private val appContext = context.applicationContext
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        if(!isOnline()){
+        if (!isOnline()) {
             throw Exception("Not connected to the Internet.")
         }
         return chain.proceed(chain.request())
     }
 
-    private fun isOnline(): Boolean{
-        val connectivityManager = appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    private fun isOnline(): Boolean {
+        val connectivityManager =
+            appContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         val networkCapabilities = connectivityManager.activeNetwork ?: return false
-        val activeNetwork = connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
+        val activeNetwork =
+            connectivityManager.getNetworkCapabilities(networkCapabilities) ?: return false
 
         return when {
             activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true

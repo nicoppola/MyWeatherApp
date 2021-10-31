@@ -68,12 +68,12 @@ class CurrentWeatherFragment : Fragment() {
         requestRequiredPermissions()
 
         // bind listeners
-        binding.currentLocationWeather.setOnClickListener{
+        binding.currentLocationWeather.setOnClickListener {
             getCurrentLocationWeather()
         }
         binding.etCityZip.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                if(event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER){
+                if (event?.action == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
                     (activity?.applicationContext?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager).apply {
                         hideSoftInputFromWindow(view?.windowToken, 0)
                     }
@@ -92,7 +92,7 @@ class CurrentWeatherFragment : Fragment() {
         return binding.root
     }
 
-    fun requestRequiredPermissions(){
+    fun requestRequiredPermissions() {
         if (ActivityCompat.checkSelfPermission(
                 requireActivity().applicationContext,
                 Manifest.permission.ACCESS_FINE_LOCATION

@@ -7,7 +7,12 @@ class WeatherRepository
 @Inject
 constructor(private val openWeatherApi: OpenWeatherApi) {
 
-    suspend fun getCurrentWeather(zipCode: Int, units: String) = openWeatherApi.getWeather(zipCode, units)
-    suspend fun getCurrentWeather(location: String, units: String) = openWeatherApi.getWeather(location, units)
-    suspend fun getCurrentWeather(longitude: String, latitude: String, units: String) = openWeatherApi.getWeather(longitude, latitude, units)
+    suspend fun getCurrentWeather(zipCode: Int, units: String) =
+        openWeatherApi.getWeather(zipCode, units)
+
+    suspend fun getCurrentWeather(location: String, units: String) =
+        openWeatherApi.getWeather(location, units)
+
+    suspend fun getCurrentWeather(longitude: String, latitude: String, units: String) =
+        openWeatherApi.getWeather(longitude, latitude, units)
 }

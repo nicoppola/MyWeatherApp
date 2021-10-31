@@ -12,8 +12,6 @@ import retrofit2.http.Query
 const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 const val API_KEY = "cf002751564a4c78f5f7ed479f1b9ba3"
 
-//api.openweathermap.org/data/2.5/weather?q=Saint Louis&units=imperial&appid=cf002751564a4c78f5f7ed479f1b9ba3
-
 interface OpenWeatherApi {
 
     @GET("weather")
@@ -30,7 +28,7 @@ interface OpenWeatherApi {
 
     @GET("weather")
     suspend fun getWeather(
-        @Query( "lon") longitude: String,
+        @Query("lon") longitude: String,
         @Query("lat") latitude: String,
         @Query("units") units: String = "imperial"
     ): Response<WeatherResponse>

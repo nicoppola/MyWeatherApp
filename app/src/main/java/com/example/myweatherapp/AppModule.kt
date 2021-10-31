@@ -26,31 +26,6 @@ object AppModule {
     @Provides
     @Singleton
     fun provideRetrofitInstance(connectivityInterceptor: ConnectivityInterceptor): OpenWeatherApi {
-        val requestInterceptor = Interceptor { chain ->
-            val url = chain.request()
-                .url
-                .newBuilder()
-                .addQueryParameter("appid", com.example.myweatherapp.models.API_KEY)
-                .build()
-            val request = chain.request()
-                .newBuilder()
-                .url(url)
-                .build()
-
-            return@Interceptor chain.proceed(request)
-        }
-
-        val okHttpClient = OkHttpClient.Builder()
-            .addInterceptor(requestInterceptor)
-            .addInterceptor(connectivityInterceptor)
-            .build()
-
-        return Retrofit.Builder()
-            .client(okHttpClient)
-            .baseUrl(com.example.myweatherapp.models.BASE_URL)
-            //.addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create(OpenWeatherApi::class.java)
+        return OpenWeatherApi.invoke()
     }
 }
