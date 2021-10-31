@@ -1,15 +1,18 @@
 package com.example.myweatherapp.models
 
+import com.example.myweatherapp.ConnectivityInterceptor
+import com.example.myweatherapp.IConnectivityInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-const val BASE_URL = "api.openweathermap.org/data/2.5/"
+const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 const val API_KEY = "cf002751564a4c78f5f7ed479f1b9ba3"
 
 //api.openweathermap.org/data/2.5/weather?q=Saint Louis&units=imperial&appid=cf002751564a4c78f5f7ed479f1b9ba3
@@ -17,16 +20,18 @@ const val API_KEY = "cf002751564a4c78f5f7ed479f1b9ba3"
 interface OpenWeatherApi {
 
     @GET("weather")
-    fun getWeather(
+    suspend fun getWeather(
         @Query("q") location: String,
         @Query("units") units: String = "imperial"
-    ): Deferred<WeatherResponse>
+    ): Response<WeatherResponse>
 
     companion object {
-        operator fun invoke(): OpenWeatherApi {
+        operator fun invoke(
+            //connectivityInterceptor: IConnectivityInterceptor
+        ): OpenWeatherApi {
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
-                    .url()
+                    .url
                     .newBuilder()
                     .addQueryParameter("appid", API_KEY)
                     .build()
@@ -40,12 +45,13 @@ interface OpenWeatherApi {
 
             val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                //.addInterceptor(connectivityInterceptor)
                 .build()
 
             return Retrofit.Builder()
                 .client(okHttpClient)
                 .baseUrl(BASE_URL)
-                .addCallAdapterFactory(CoroutineCallAdapterFactory())
+                //.addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(OpenWeatherApi::class.java)
