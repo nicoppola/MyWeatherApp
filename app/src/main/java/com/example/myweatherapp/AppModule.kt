@@ -26,7 +26,6 @@ object AppModule {
     fun provideBaseUrl() = BASE_URL
 
 
-
     @Provides
     @Singleton
     fun provideRetrofitInstance(BASE_URL: String): OpenWeatherApi {

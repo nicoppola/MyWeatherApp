@@ -25,6 +25,13 @@ interface OpenWeatherApi {
         @Query("units") units: String = "imperial"
     ): Response<WeatherResponse>
 
+    @GET("weather")
+    suspend fun getWeather(
+        @Query( "lon") longitude: String,
+        @Query("lat") latitude: String,
+        @Query("units") units: String = "imperial"
+    ): Response<WeatherResponse>
+
     companion object {
         operator fun invoke(
             //connectivityInterceptor: IConnectivityInterceptor

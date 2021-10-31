@@ -1,13 +1,17 @@
 package com.example.myweatherapp.viewmodels
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.myweatherapp.models.LocationCoordinates
 import com.example.myweatherapp.models.WeatherResponse
 import com.example.myweatherapp.models.repository.WeatherRepository
 import com.example.myweatherapp.utils.TAG
+import com.google.android.gms.location.LocationRequest
+import com.google.android.gms.location.LocationServices
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,18 +25,38 @@ constructor(private val weatherRepository: WeatherRepository): ViewModel() {
     val weatherData: LiveData<WeatherResponse>
         get() = _weatherData
 
+    val weatherStatus = MutableLiveData<String>()
+    val location = MutableLiveData<String>()
+
     init {
+        location.value = "St. Louis"
         getCurrentWeather()
     }
 
-    private fun getCurrentWeather() = viewModelScope.launch {
-        weatherRepository.getCurrentWeather("St. Louis", "imperial").let{ response ->
+    fun getCurrentWeather() = viewModelScope.launch {
+        weatherRepository.getCurrentWeather(location.value ?: "", "imperial").let{ response ->
 
             if(response.isSuccessful){
                 _weatherData.postValue(response.body())
+                weatherStatus.postValue("success")
             } else{
                 Log.d(TAG, "getCurrentWeather Error Response: ${response.message()}")
+                weatherStatus.postValue("Error getting weather data: ${response.message()}")
             }
+            location.postValue("")
+        }
+    }
+
+    fun getCurrentLocationWeather(longitude: String, latitude: String) = viewModelScope.launch {
+        weatherRepository.getCurrentWeather(longitude, latitude, "imperial").let{ response ->
+            if(response.isSuccessful){
+                _weatherData.postValue(response.body())
+                weatherStatus.postValue("success")
+            } else{
+                Log.d(TAG, "getCurrentWeather Error Response: ${response.message()}")
+                weatherStatus.postValue("Error getting weather data: ${response.message()}")
+            }
+            location.postValue("")
         }
     }
 }
