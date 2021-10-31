@@ -18,6 +18,12 @@ interface OpenWeatherApi {
 
     @GET("weather")
     suspend fun getWeather(
+        @Query("zip") zip: Int,
+        @Query("units") units: String = "imperial"
+    ): Response<WeatherResponse>
+
+    @GET("weather")
+    suspend fun getWeather(
         @Query("q") location: String,
         @Query("units") units: String = "imperial"
     ): Response<WeatherResponse>

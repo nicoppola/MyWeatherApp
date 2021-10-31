@@ -1,111 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="weatherVM"
-            type="com.example.myweatherapp.viewmodels.CurrentWeatherViewModel"/>
+            type="com.example.myweatherapp.viewmodels.CurrentWeatherViewModel" />
     </data>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".CurrentWeatherFragment">
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_centerHorizontal="true"
-        android:gravity="center">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-        <EditText
-            android:text="@={weatherVM.location}"
-            android:id="@+id/et_city_zip"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/city_or_zip_code"
-            android:inputType="text"
-            android:minHeight="48dp" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/go"
-            android:onClick="@{() -> weatherVM.getCurrentWeather()}"/>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/currentLocationWeather"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            android:text="Current Location"/>
-
-        <TextView
-            android:id="@+id/tv_city"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="34sp"
-            android:text="@{weatherVM.weatherData.name}" />
-
-        <TextView
-            android:id="@+id/tv_conditions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:text="@{weatherVM.weatherData.weather[0].description}" />
-
-
-        <TextView
-            android:id="@+id/tv_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="54sp"
-            android:text="@{String.valueOf(weatherVM.weatherData.main.temp)}" />
+        tools:context=".views.CurrentWeatherFragment">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="H: "/>
-            <TextView
-                android:id="@+id/tv_high_temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:text="@{String.valueOf(weatherVM.weatherData.main.tempMax)}" />
+                android:layout_marginTop="18dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/et_city_zip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/city_or_zip_code"
+                    android:inputType="text"
+                    android:minHeight="48dp"
+                    android:text="@={weatherVM.location}" />
+
+                <ImageButton
+                    android:id="@+id/currentLocationWeather"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:tooltipText="@string/current_location_weather"
+                    android:src="@drawable/ic_baseline_near_me_24" />
+
+            </LinearLayout>
+
 
             <TextView
+                android:id="@+id/tv_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="L: "/>
+                android:text="@{weatherVM.weatherData.name}"
+                android:textSize="34sp" />
+
             <TextView
-                android:id="@+id/tv_low_temp"
+                android:id="@+id/tv_conditions"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(weatherVM.weatherData.main.tempMin)}" />
+                android:text="@{weatherVM.weatherData.weather[0].description}"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="@{String.valueOf(weatherVM.weatherData.main.temp)}"
+                    android:textSize="54sp" />
+
+                <TextView
+                    android:id="@+id/tv_degrees"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/farenheit_degrees"
+                    android:textSize="54sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/h"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_high_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="@{String.valueOf(weatherVM.weatherData.main.tempMax)}"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/l"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_low_temp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(weatherVM.weatherData.main.tempMin)}"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="35dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/feels_like"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(weatherVM.weatherData.main.feelsLike)}"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/farenheit_degrees"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_humidity_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/humidity"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tv_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(weatherVM.weatherData.main.humidity)}"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tv_humidity_percent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/percent"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/wind_speed"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(weatherVM.weatherData.wind.speed)}"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mph"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+
         </LinearLayout>
-
-
-
-<!--        <TextView-->
-<!--            android:id="@+id/tv_humidity"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="Humidity" />-->
-
-
-    </LinearLayout>
-
 
 
     </RelativeLayout>

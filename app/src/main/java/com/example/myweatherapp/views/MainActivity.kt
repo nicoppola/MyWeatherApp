@@ -1,8 +1,8 @@
-package com.example.myweatherapp
+package com.example.myweatherapp.views
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.commit
+import com.example.myweatherapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

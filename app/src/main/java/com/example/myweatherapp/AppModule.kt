@@ -1,5 +1,6 @@
 package com.example.myweatherapp
 
+import android.app.Application
 import com.example.myweatherapp.models.API_KEY
 import com.example.myweatherapp.models.BASE_URL
 import com.example.myweatherapp.models.OpenWeatherApi
@@ -18,17 +19,13 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-//    @Provides
-//    @Singleton
-//    fun providesConnectivityInjector() = ConnectivityInterceptor()
 
     @Provides
-    fun provideBaseUrl() = BASE_URL
-
+    fun provideConnectivityInterceptor(context: Application) = ConnectivityInterceptor(context)
 
     @Provides
     @Singleton
-    fun provideRetrofitInstance(BASE_URL: String): OpenWeatherApi {
+    fun provideRetrofitInstance(connectivityInterceptor: ConnectivityInterceptor): OpenWeatherApi {
         val requestInterceptor = Interceptor { chain ->
             val url = chain.request()
                 .url
@@ -45,7 +42,7 @@ object AppModule {
 
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(requestInterceptor)
-            //.addInterceptor(connectivityInterceptor)
+            .addInterceptor(connectivityInterceptor)
             .build()
 
         return Retrofit.Builder()

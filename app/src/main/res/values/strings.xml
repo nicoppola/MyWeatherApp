@@ -2,4 +2,13 @@
     <string name="app_name">MyWeatherApp</string>
     <string name="city_or_zip_code">city or zip code</string>
     <string name="go">GO</string>
+    <string name="h">H:</string>
+    <string name="l">L:</string>
+    <string name="farenheit_degrees">°F</string>
+    <string name="humidity">Humidity:</string>
+    <string name="percent">%</string>
+    <string name="feels_like">Feels Like:</string>
+    <string name="mph">mph</string>
+    <string name="wind_speed">Wind Speed:</string>
+    <string name="current_location_weather">Current Location Weather</string>
 </resources>
