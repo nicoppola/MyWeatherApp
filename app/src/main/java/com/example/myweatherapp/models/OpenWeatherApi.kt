@@ -1,9 +1,6 @@
 package com.example.myweatherapp.models
 
-import com.example.myweatherapp.ConnectivityInterceptor
-import com.example.myweatherapp.IConnectivityInterceptor
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import kotlinx.coroutines.Deferred
+import com.example.myweatherapp.models.Responses.WeatherResponse
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Response

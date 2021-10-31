@@ -18,6 +18,10 @@
         android:orientation="vertical"
         android:layout_centerHorizontal="true"
         android:gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
         <EditText
             android:text="@={weatherVM.location}"
             android:id="@+id/et_city_zip"
@@ -31,51 +35,73 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="GO"
+            android:text="@string/go"
             android:onClick="@{() -> weatherVM.getCurrentWeather()}"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/currentLocationWeather"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Current Weather"/>
-
+            android:layout_marginBottom="30dp"
+            android:text="Current Location"/>
 
         <TextView
             android:id="@+id/tv_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="34sp"
             android:text="@{weatherVM.weatherData.name}" />
 
         <TextView
             android:id="@+id/tv_conditions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="18sp"
             android:text="@{weatherVM.weatherData.weather[0].description}" />
+
 
         <TextView
             android:id="@+id/tv_temp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="54sp"
             android:text="@{String.valueOf(weatherVM.weatherData.main.temp)}" />
 
-        <TextView
-            android:id="@+id/tv_high_temp"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="High Temp" />
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="H: "/>
+            <TextView
+                android:id="@+id/tv_high_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@{String.valueOf(weatherVM.weatherData.main.tempMax)}" />
 
-        <TextView
-            android:id="@+id/tv_low_temp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Low Temp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="L: "/>
+            <TextView
+                android:id="@+id/tv_low_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{String.valueOf(weatherVM.weatherData.main.tempMin)}" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_humidity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Humidity" />
+
+
+<!--        <TextView-->
+<!--            android:id="@+id/tv_humidity"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Humidity" />-->
 
 
     </LinearLayout>
